@@ -7,7 +7,7 @@ const gameRoutes = express.Router();
 gameRoutes.get("/games",gameController.getAllGames);
 gameRoutes.post("/games",gameController.createGame)
 gameRoutes.delete("/games/:id",gameController.deleteGame);
-gameRoutes.put("/games",gameController.updateGame);
+gameRoutes.put("/games/:id",gameController.updateGame);
 
 export default gameRoutes;
 
