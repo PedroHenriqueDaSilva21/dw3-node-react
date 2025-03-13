@@ -51,4 +51,21 @@ const deleteGame = async (req,res) => {
   }
 }
 
-export default { getAllGames, createGame, deleteGame };
+const updateGame = async (req,res) => {
+  try{
+    if(ObjectId.isValid(req.params.id)){
+      const id = req.params.id
+      // Desestruturação
+      //const title = req.body.title
+      const { title, platform, year, price} = req.body
+      gameService.Update(id, title, platform, year, price);
+      res.sendStatus(200) // Código 200 (OK): Requisição bem sucedida
+    } else {
+      res.sendStatus(400) // Código 400 (Bad Request): Requisição mal formada
+    }
+  } catch (error) {
+  console.log(error)
+  res.status(500).json({ error: "Erro interno do servidor."})
+}}
+
+export default { getAllGames, createGame, deleteGame, updateGame };
