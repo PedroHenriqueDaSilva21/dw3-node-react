@@ -53,6 +53,16 @@ class gameService {
       console.log(error);
     }
   }
+
+  //Função para Listar um Único jogo
+  async getOne(id) {
+    try {
+      const game = await Game.findOne({ _id: id });
+      return game;
+    } catch (err) {
+      console.log(err);
+    }
+  }
 }
 
 export default new gameService();
