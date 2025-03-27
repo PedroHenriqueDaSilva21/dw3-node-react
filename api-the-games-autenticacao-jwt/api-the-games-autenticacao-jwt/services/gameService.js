@@ -2,10 +2,13 @@ import Game from "../models/Games.js";
 
 class gameService {
   // Game.find().then(games => {
-  //     //Sucesso
-  // }).catch(error=>{
-  //     // falha
+  // //sucesso
+  // }).catch(error => {
+  // // falha
   // })
+
+  // async / await
+  // Função para listar os jogos
   async getAll() {
     try {
       const games = await Game.find();
@@ -15,38 +18,42 @@ class gameService {
     }
   }
 
+  // Função para cadastrar jogos
   async Create(title, year, price, descriptions) {
     try {
       const newGame = new Game({
-        title: title,
-        year: year,
-        price: price,
-        descriptions: descriptions
+        // title : title
+        title,
+        year,
+        price,
+        descriptions
       });
-      //.save é o método do moongose para cadastrar .save()
+      // Método do mongoose para cadastrar .save()
       await newGame.save();
-    } catch (err) {
-      console.log(err);
+    } catch (error) {
+      console.log(error);
     }
   }
 
+  // Função para deletar jogos
   async Delete(id) {
     try {
       await Game.findByIdAndDelete(id);
-      console.log(`Game com a id: ${id} foi excluido`);
-    } catch (err) {
-      console.log(err);
+      console.log(`Game com a id: ${id} foi excluído.`);
+    } catch (error) {
+      console.log(error);
     }
   }
 
   // Função para alterar jogos
-  async Update(id, title, platform, year, price) {
+  async Update(id, title, year, price, descriptions) {
     try {
       await Game.findByIdAndUpdate(id, {
+        // title : title
         title,
-        platform,
         year,
         price,
+        descriptions
       });
       console.log(`Dados do game com a id: ${id} alterados com sucesso.`);
     } catch (error) {
@@ -54,13 +61,13 @@ class gameService {
     }
   }
 
-  //Função para Listar um Único jogo
+  // Função para listar um único jogo
   async getOne(id) {
     try {
       const game = await Game.findOne({ _id: id });
       return game;
-    } catch (err) {
-      console.log(err);
+    } catch (error) {
+      console.log(error);
     }
   }
 }
